@@ -17,9 +17,9 @@ namespace Grup34_Caculator.Test.Unit
 		}
 
 		[Test]
-		public void Add_ToNumbers()
+		public void Add_ToNumbers(int a, int b, int result)
 		{
-			Assert.That(uut.Add(2, 2), Is.EqualTo(4));
+			Assert.That(uut.Add(a, b), Is.EqualTo(result));
 		}
 
 		[Test]
