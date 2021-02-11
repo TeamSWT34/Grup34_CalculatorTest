@@ -22,7 +22,7 @@ namespace Grup34_CalculatorTest
 		{
 			if (a == 0 || b == 0)
 			{
-				throw new ArgumentOutOfRangeException(paramName: "Du kan ikke gange med 0");
+				throw new ArgumentOutOfRangeException(paramName: "Du kan ikke gange med 0. Fyyyha");
 			}
 			else
 			{
