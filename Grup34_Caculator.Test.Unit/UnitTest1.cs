@@ -51,13 +51,84 @@ namespace Grup34_Caculator.Test.Unit
 			Assert.That(uut.Power(a, b), Is.EqualTo(result));
 		}
 
-		//[TestCase(0, 2)]
-		//[TestCase(2, 2)]
-		//public void AddItem_null_Throws(int a, int b)
-		//{
-		//	//Act + Assert
-		//	Assert.That(code: () => uut.Multiply(a, b),
-		//		constraint: Throws.TypeOf<ArgumentOutOfRangeException>());
-		//}
-	}
+        [TestCase(2, 0)]
+        public void Divide_NumbByZero(double a, double b)
+        {
+            //Act + Assert
+            Assert.That(code: () => uut.Divide(a, b),
+                constraint: Throws.TypeOf<ArgumentOutOfRangeException>());
+        }
+
+		[TestCase(10, 2, 5)]
+        [TestCase(45, 5, 9)]
+        [TestCase(90, 10, 9)]
+        [TestCase(4, 32, 0.125)]
+        public void Divide_ToNumbers(double a, double b, double result)
+        {
+            Assert.That(uut.Divide(a, b), Is.EqualTo(result));
+		}
+
+
+        //
+        // ------- Accumulator --------
+        //
+        
+
+        [TestCase(2, 2, 4)]
+        [TestCase(2, -2, 0)]
+        [TestCase(1, -2.5, -1.5)]
+        public void Add_ToAccumulator(double a, double b, double result)
+        {
+            uut.Add(a);
+            uut.Add(b);
+			Assert.AreEqual(result,uut.Accumulator);
+        }
+
+        [TestCase(2, 2, -4)]
+        [TestCase(2, -2, 0)]
+        [TestCase(1, -5, 4)]
+        public void Subtract_ToAccumulator(double a, double b, double result)
+        {
+            uut.Subst(a);
+            uut.Subst(b);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+        [TestCase(2, 9, 18)]
+        [TestCase(29, 0, 0)]
+        [TestCase(2, 10, 20)]
+        [TestCase(2, 2, 4)]
+        public void Multiply_ToAccumulator(double a, double b, double result)
+        {
+            uut.Add(a);
+            uut.Multiply(b);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+
+		[TestCase(1232, 0, 1)]
+        [TestCase(2, 4, 16)]
+        [TestCase(69, 2, 4761)]
+        [TestCase(-23, 0.5, double.NaN)]
+        public void Power_ToAccumulator(double a, double b, double result)
+        {
+            uut.Add(a);
+            uut.Power(b);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+
+        [TestCase(10, 2, 5)]
+        [TestCase(45, 5, 9)]
+        [TestCase(90, 10, 9)]
+        [TestCase(4, 32, 0.125)]
+        public void Divide_ToAccumulator(double a, double b, double result)
+        {
+            uut.Add(a);
+            uut.Divide(b);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+
+    }
 }
