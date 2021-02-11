@@ -129,6 +129,52 @@ namespace Grup34_Caculator.Test.Unit
             Assert.AreEqual(result, uut.Accumulator);
         }
 
+        //
+        // ------- Accumulator Advanced --------
+        //
+
+        [TestCase(10, 2, 12, 96)]
+        public void Add_ToAccumulator(double a, double b, double c, double result)
+        {
+            uut.Add(a);
+            uut.Subst(b);
+            uut.Multiply(c);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+        [TestCase(10, 43, 2, 184900)]
+        public void Subtract_ToAccumulator(double a, double b, double c, double result)
+        {
+            uut.Subst(a);
+            uut.Multiply(b);
+            uut.Power(c);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+
+        [TestCase(10, 184900, double.PositiveInfinity)]
+        public void Power_OutOfRange(double a, double b,  double result)
+        {
+            uut.Add(a);
+            uut.Power(b);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
+
+        //
+        // ------- Clear function --------
+        //
+
+
+        [TestCase(10, 43, 10, 10)]
+        [TestCase(1515, 215, 0, 0)]
+        public void Clear_ToAccumulator(double a, double b, double c, double result)
+        {
+            uut.Subst(a);
+            uut.Multiply(b);
+            uut.Clear();
+            uut.Add(c);
+            Assert.AreEqual(result, uut.Accumulator);
+        }
 
     }
 }

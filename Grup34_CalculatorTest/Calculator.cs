@@ -51,5 +51,7 @@ namespace Grup34_CalculatorTest
             return Accumulator /= divisor;
         }
 
+        public double Clear() => (Accumulator = 0);
+
     }
 }
